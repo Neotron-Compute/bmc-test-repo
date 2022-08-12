@@ -1,0 +1,26 @@
+[package]
+authors = ["Jonathan Pallant (Ferrous Systems) <jonathan.pallant@ferrous-systems.com>"]
+edition = "2018"
+readme = "README.md"
+name = "neotron-bmc"
+version = "0.1.0"
+
+[dependencies]
+cortex-m = "0.7.0"
+cortex-m-rt = "0.7"
+panic-halt = "0.2.0"
+defmt = "0.3"
+defmt-rtt = "0.3"
+
+stm32f3xx-hal = { version = "*", features = ["stm32f303xc"] }
+
+# this lets you use `cargo fix`!
+[[bin]]
+name = "neotron-bmc"
+test = false
+bench = false
+
+[profile.release]
+codegen-units = 1 # better optimizations
+debug = true # symbols are nice and they don't increase the size on Flash
+lto = true # better optimizations
